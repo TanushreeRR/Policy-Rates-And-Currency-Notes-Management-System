@@ -5,3 +5,6 @@ RBI releases the values of policy rates (RR,RRR,CRR,SLR) once in a quarter, base
 
 # Technologies used:
 Nodejs, express, mysql, HTML and CSS.
+
+# Steps to run:
+In the terminal, use the following commands: "npm init","npm install --save express mysql", "npm install multiple-linear-regression", and "node tables.js".
