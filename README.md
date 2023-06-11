@@ -7,4 +7,4 @@ RBI releases the values of policy rates (RR,RRR,CRR,SLR) once in a quarter, base
 Nodejs, express, mysql, HTML and CSS.
 
 # Steps to run:
-In the terminal, use the following commands: "npm init","npm install --save express mysql", "npm install multiple-linear-regression", and "node tables.js".
+Run the XAMPP server in the background, and use the following commands in termianl: "npm init","npm install --save express mysql", "npm install multiple-linear-regression", and "node tables.js". The sql statements written in node js can be executed by running them in web browser using "localhost:3000/createrbipolicies", and so on , "localhost:3000/" being the last execution.
