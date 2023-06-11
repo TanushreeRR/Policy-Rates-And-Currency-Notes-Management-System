@@ -1,0 +1,64 @@
+html {
+    height: 100%;
+  }
+body {
+    margin: 0;
+    background-size:cover;
+    background-repeat: no-repeat;
+    background-position: center ; 
+    height: 100%;
+    width: 100%;
+    color: whitesmoke;
+
+}
+
+.navbar {
+  background-color: black;
+  color: white;
+  padding: 40px;
+}
+
+button{
+  background-color: #151b29;
+  color: #ffa260;
+  border: 2px solid;
+  padding: 1px 3px;
+  font-size: 1em;
+  /*transition: all 0.5s;*/
+  transition: color 0.25s, border-color 0.25s,box-shadow 0.25s, transform 0.25s;
+  margin-left: 5px;
+}
+button:hover{
+  border-color: #f1ff5c;
+  color: white;
+  box-shadow: 0 0.5em 0.5em -0.4em;
+  transform: translateY(-0.25em);
+  cursor: pointer;
+}
+a {
+  margin-left: 0;
+  text-decoration: none;
+  color: #ffa260;
+}
+
+a:hover {
+  color: white;
+}
+
+
+.value{
+    margin: 30px;
+}
+select{
+    background-color: #779bd5;
+}
+#search{
+    background-color: #779bd5;
+    border: 2px solid var(--primary-color);
+    margin-left: auto;
+    border-radius: 50px;
+    color: black;
+}
+.lastb{
+    margin-top: 10px;
+}
