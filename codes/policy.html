@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="policy.css">
+
+  <title>Get Policy Rates</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    .q1 {
+      float: left;
+      width: 48%;
+    }
+
+    .q2 {
+      float: right;
+      width: 48%;
+    }
+
+    body {
+      background-image: url('/images/abstract-financial-graph-uptrend-line-260nw-1526875985.jpg');
+    }
+  </style>
+</head>
+
+<body>
+  <div class="navbar" style=" background-color: black;height: 68px;">
+    <span class="left" style="height: 50px; padding-top: 7px;padding-left: 20px">
+      <a href="home.html">Home</a></span>
+    <span style="margin-right: 500px;font-size: larger; padding: 10px;">POLICY RATES AND CURRENCY MANAGEMENT SYSTEM OF RBI</span> 
+    </div>
+  
+
+  <div class="q1">
+    <form id="policy-form">
+      <div class="mb-3">
+        <label for="year-select">Select a year:</label>
+        <select id="year-select" name="year">
+          <option value="2021">2021</option>
+          <option value="2022">2022</option>
+          <option value="2023">2023</option>
+        </select>
+      </div>
+
+      <div class="mb-3">
+        <label for="quarter-select">Select a quarter number:</label>
+        <select id="quarter-select" name="quarter">
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+        </select>
+      </div>
+
+      <button type="submit">Submit</button>
+    </form>
+  </div>
+
+  <div class="q2">
+    <form id="factor-form">
+      <div class="mb-3">
+        <label for="policy-select">Select a policy:</label>
+        <select id="policy-select" name="policy">
+          <option value="RR">RR</option>
+          <option value="RRR">RRR</option>
+          <option value="CRR">CRR</option>
+          <option value="SLR">SLR</option>
+        </select>
+      </div>
+
+      <div class="mb-3">
+        <label for="inflation-input">Enter new inflation value:</label>
+        <input type="text" id="inflation-input" name="inflation">
+      </div>
+
+      <div class="mb-3">
+        <label for="growth-input">Enter new economic growth value:</label>
+        <input type="text" id="growth-input" name="growth">
+      </div>
+
+      <div class="mb-3">
+        <label for="deficit-input">Enter new fiscal deficit value:</label>
+        <input type="text" id="deficit-input" name="deficit">
+      </div>
+
+      <div class="mb-3">
+        <label for="exchange-input">Enter new currency exchange rate:</label>
+        <input type="text" id="exchange-input" name="exchange">
+      </div>
+
+      <button type="submit" class="lastb">Submit</button>
+    </form>
+  </div>
+
+  <div id="policy-rates"></div>
+  <div id="factor-result"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    const policyForm = document.querySelector('#policy-form');
+    const policyRatesDiv = document.querySelector('#policy-rates');
+    const factorForm = document.querySelector('#factor-form');
+    const factorResultDiv = document.querySelector('#factor-result');
+
+    policyForm.addEventListener('submit', (event) => {
+      event.preventDefault();
+      const year = policyForm.elements['year'].value;
+      const quarter = policyForm.elements['quarter'].value;
+
+      fetch(`/policy-rates/${year}/${quarter}`)
+        .then((response) => response.json())
+        .then((policyRates) => {
+          policyRatesDiv.innerHTML = '';
+          policyRates.forEach((rate) => {
+            policyRatesDiv.innerHTML += `
+              <p class="q1">${rate.POLICY_NAME}: ${rate.VALUE}</p>
+            `;
+          });
+        });
+    });
+
+    factorForm.addEventListener('submit', (event) => {
+      event.preventDefault();
+      const policy = factorForm.elements['policy'].value;
+      const inflation = factorForm.elements['inflation'].value;
+      const growth = factorForm.elements['growth'].value;
+      const deficit = factorForm.elements['deficit'].value;
+      const exchange = factorForm.elements['exchange'].value;
+
+      fetch(`/factors/${policy}/${inflation}/${growth}/${deficit}/${exchange}`)
+        .then((response) => response.json())
+        .then((factorData) => {
+          const predict = factorData;
+          factorResultDiv.innerHTML = `
+            <p class="q2">The predicted value of the policy rate for the next quarter is ${predict}.</p>
+          `;
+        });
+    });
+  </script>
+</body>
+
+</html>
